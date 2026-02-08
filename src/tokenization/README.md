@@ -255,7 +255,7 @@ uv run -m src.tokenization.train \
   --input_dir "data/dataset_files" \
   --corpus "data/corpus.txt" \
   --vocab_size 128000 \
-  --model_save_dir "tokenizer_models1" \
+  --model_save_dir "tokenizer_models" \
   --model_type "bpe"
 ```
 
@@ -263,7 +263,7 @@ uv run -m src.tokenization.train \
 >
 > * Merge and normalize text files from `data/dataset_files`
 > * Train a SentencePiece tokenizer with BPE model
-> * Save the model and vocab in `tokenizer_models1/`
+> * Save the model and vocab in `tokenizer_models/`
 
 ---
 

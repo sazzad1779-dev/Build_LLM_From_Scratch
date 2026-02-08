@@ -4,7 +4,7 @@ This project demonstrates the **complete process of building a Large Language Mo
 
 ---
 
-## 🔹 Project Overview
+## Project Overview
 
 In this repository, we go step by step to:
 
@@ -17,13 +17,13 @@ In this repository, we go step by step to:
 
 ---
 
-## 🔹 Prepare and Process Datasets
-### Tokenization Dataset Preparation
+### 🔹 Prepare and Process Datasets
+##### Tokenization Dataset Preparation
 
 
-### Pretraining Dataset Preparation
+##### Pretraining Dataset Preparation
 
-## 🔹 Tokenization
+### 🔹 Tokenization
 
 The first part of this project focuses on **tokenization** and creating a **custom tokenizer** for your dataset.
 
@@ -38,7 +38,7 @@ The first part of this project focuses on **tokenization** and creating a **cust
 
 ---
 
-## 🔹 Next Steps
+### 🔹 Next Steps
 
 After tokenization, the project will cover:
 
@@ -52,9 +52,12 @@ After tokenization, the project will cover:
 
 ```
 src/
-├─ tokenization/        # Scripts for corpus preparation, tokenizer training, and evaluation
-├─ modeling/            # Model architecture and training scripts
-├─ data/                # Dataset files
+├─ preprocessing/        # Scripts for corpus preparation
+├─ tokenization/        # Scripts for tokenization corpus preparation, tokenizer training, and evaluation
+├─ modeling/            # Model architecture 
+├─ pretraining/            # Model pre-training scripts
+├─ finetuning/             # Model finetuning scripts
+├─ evaluation/             # Model evaluation scripts
 tokenizer_models/        # Trained tokenizer models
 README.md               # Root README
 ```
