@@ -220,3 +220,72 @@ Better tokenization leads to:
 * Lower memory use
 * Improved generalization
 
+
+---
+
+# 🛠 Tokenizer Training with Custom Data
+
+Follow these steps to train a custom SentencePiece tokenizer on your own dataset.
+
+---
+
+## 1️⃣ Clone the repository
+
+```bash
+git clone <your-repo-url>
+cd <repo>
+```
+
+---
+
+## 2️⃣ Sync package requirements
+
+If you are using **uv**:
+
+```bash
+uv sync
+```
+
+---
+
+## 3️⃣ Run the training script
+
+```bash
+uv run -m src.tokenization.train \
+  --input_dir "data/dataset_files" \
+  --corpus "data/corpus.txt" \
+  --vocab_size 128000 \
+  --model_save_dir "tokenizer_models1" \
+  --model_type "bpe"
+```
+
+> This will:
+>
+> * Merge and normalize text files from `data/dataset_files`
+> * Train a SentencePiece tokenizer with BPE model
+> * Save the model and vocab in `tokenizer_models1/`
+
+---
+
+## 4️⃣ Training Options
+
+| Option                                      | Description                                         |
+| ------------------------------------------- | --------------------------------------------------- |
+| `-h, --help`                                | Show help message                                   |
+| `--input_dir INPUT_DIR`                     | Directory containing text files                     |
+| `--corpus CORPUS`                           | Path to merged training corpus file                 |
+| `--model_save_dir MODEL_SAVE_DIR`           | Directory to save the trained model                 |
+| `--model_prefix MODEL_PREFIX`               | Base name for model and vocab files                 |
+| `--vocab_size VOCAB_SIZE`                   | Vocabulary size (e.g., 16000, 32000, 128000)        |
+| `--model_type {unigram,bpe,word,char}`      | SentencePiece model type                            |
+| `--character_coverage CHARACTER_COVERAGE`   | Fraction of characters to include (default: 0.9995) |
+| `--norm_rule NORM_RULE`                     | Normalization rule (default: nmt_nfkc)              |
+| `--sample_size SAMPLE_SIZE`                 | Number of sentences sampled for training            |
+| `--max_sentence_length MAX_SENTENCE_LENGTH` | Max sentence length                                 |
+| `--byte_fallback`                           | Enable byte fallback for unseen characters          |
+
+---
+
+✅ **Tip:** Adjust `vocab_size` and `model_type` based on your dataset size and language. After training, you can immediately evaluate the tokenizer using the evaluation script to check metrics like **Fertility, CPT, and WFR**.
+
+
