@@ -3,53 +3,9 @@ from pathlib import Path
 import unicodedata
 import re
 import pandas as pd
+from src.preprocessing.tokenization.process import load_corpus
 
-# ---------------------------
-# Text normalization
-# ---------------------------
-def normalize_text(text: str) -> str:
-    """Normalize text for tokenizer evaluation."""
-    text = unicodedata.normalize("NFKC", text)
-    text = re.sub(r"[\u0000-\u001F\u007F]", "", text)  # Remove control chars
-    text = re.sub(r"\s+", " ", text).strip()
-    return text
 
-# ---------------------------
-# Load corpus from multiple formats
-# ---------------------------
-def load_corpus(file_path: str, file_type: str = "txt", text_column: str = None):
-    """
-    Load corpus lines from a file for evaluation.
-    
-    Args:
-        file_path: Path to the corpus file.
-        file_type: 'txt', 'csv', or 'md'.
-        text_column: For CSV, column containing text.
-    
-    Returns:
-        List of normalized text lines.
-    """
-    lines = []
-    file_path = Path(file_path)
-
-    try:
-        if file_type in ["txt", "md"]:
-            with open(file_path, "r", encoding="utf-8") as f:
-                for line in f:
-                    line = normalize_text(line)
-                    if line:
-                        lines.append(line)
-
-        elif file_type == "csv":
-            df = pd.read_csv(file_path, usecols=[text_column] if text_column else None)
-            for text in df[text_column] if text_column else df.iloc[:,0]:
-                text = normalize_text(str(text))
-                if text:
-                    lines.append(text)
-    except Exception as e:
-        print(f"⚠ Skipping {file_path} due to error: {e}")
-
-    return lines
 
 # ---------------------------
 # Tokenizer evaluation
